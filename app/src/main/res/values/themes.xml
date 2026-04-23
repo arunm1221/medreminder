@@ -2,4 +2,14 @@
 <resources>
 
     <style name="Theme.Medreminder" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="Theme.Medreminder." parent="Theme.Material3.DayNight.NoActionBar"> </style>
+
+    <style name="Theme.Medreminder.SplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/black</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="postSplashScreenTheme">@style/Theme.Medreminder</item>
+    </style>
+
+
 </resources>
