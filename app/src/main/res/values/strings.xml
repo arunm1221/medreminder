@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">medreminder</string>
+    <string name="welcome_preparing_subtitle">Let\'s get everything ready for you.</string>
 </resources>

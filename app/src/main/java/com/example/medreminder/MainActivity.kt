@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.medreminder.ui.theme.MedreminderTheme
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.example.medreminder.presentation.onboard.OnboardScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,6 +24,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MedreminderTheme {
+                OnboardScreen()
 
             }
         }

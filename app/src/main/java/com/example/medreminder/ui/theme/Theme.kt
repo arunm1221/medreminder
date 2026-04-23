@@ -10,7 +10,27 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontVariation
+import androidx.compose.ui.text.font.FontWeight
+import com.example.medreminder.R
 
+
+@androidx.compose.ui.text.ExperimentalTextApi
+val GoogleSansFlex = FontFamily(
+    Font(
+        resId = R.font.google_sans_flex,
+        weight = FontWeight.Normal,
+        style = FontStyle.Normal,
+        variationSettings = FontVariation.Settings(
+            FontVariation.weight(400),
+            FontVariation.width(100f),
+            FontVariation.Setting("ROND", 100f)
+        )
+    )
+)
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
     secondary = PurpleGrey80,
