@@ -23,20 +23,15 @@ class OnBoardViewModel @Inject constructor(
     val isSeen :StateFlow<Boolean?> = _isSeen
 
     init {
-        loadScreen()
+
     }
 
-    private fun loadScreen() {
-        viewModelScope.launch {
-            getOnBoardUseCase().collect {
-                _isSeen.value=it
-            }
-        }
-    }
+
 
     fun onNextClick(){
         viewModelScope.launch {
             setOnBoardUseCase()
+            _isSeen.value=true
         }
     }
 }

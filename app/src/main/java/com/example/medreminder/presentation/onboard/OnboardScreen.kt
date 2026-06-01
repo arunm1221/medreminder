@@ -18,7 +18,9 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusModifier
@@ -38,7 +40,15 @@ import com.example.medreminder.ui.theme.GoogleSansFlex
 
 @OptIn(ExperimentalTextApi::class)
 @Composable
-fun OnboardScreen(viewModel: OnBoardViewModel = hiltViewModel()){
+fun OnboardScreen(
+    viewModel: OnBoardViewModel = hiltViewModel(),
+    onNavigateToLogin: () -> Unit = {}
+) {
+    val isSeen by viewModel.isSeen.collectAsState()
+
+    LaunchedEffect(isSeen) {
+        if (isSeen == true) onNavigateToLogin()
+    }
 
     Column(
         modifier = Modifier.fillMaxSize().padding(10.dp), verticalArrangement = Arrangement.SpaceBetween,
