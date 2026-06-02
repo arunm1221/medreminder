@@ -21,6 +21,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -35,8 +36,21 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.medreminder.ui.theme.GoogleSansFlex
 
 @Composable
-fun LoginScreen(viewModel: LoginViewModel = hiltViewModel()) {
+fun LoginScreen(
+    viewModel: LoginViewModel = hiltViewModel(),
+    onLoginSuccess: () -> Unit = {}
+) {
     val state by viewModel.state.collectAsState()
+
+    // Observe one-shot navigation events from the ViewModel
+    LaunchedEffect(Unit) {
+        viewModel.navigationEvent.collect { event ->
+            when (event) {
+                is LoginNavigationEvent.NavigateToHome -> onLoginSuccess()
+            }
+        }
+    }
+
     LoginContent(
         state = state,
         onUsernameChange = viewModel::onUsernameChange,
@@ -75,7 +89,7 @@ fun LoginContent(
                     value = state.username,
                     onValueChange = onUsernameChange,
                     label = { Text("User Name") },
-                    isError = state.isUserNameEmpty,
+                    isError = state.isUserNameEmpty||state.usernameError.isNotEmpty(),
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
                     modifier = Modifier.fillMaxWidth(),
@@ -84,6 +98,12 @@ fun LoginContent(
                 if (state.isUserNameEmpty) {
                     Text(
                         text = "Username is required",
+                        color = MaterialTheme.colorScheme.error,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                } else if (state.usernameError.isNotEmpty()) {
+                    Text(
+                        text = state.usernameError,
                         color = MaterialTheme.colorScheme.error,
                         modifier = Modifier.fillMaxWidth()
                     )

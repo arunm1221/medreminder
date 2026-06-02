@@ -39,6 +39,7 @@ room-compiler = { group = "androidx.room", name = "room-compiler", version.ref =
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 material = {group = "com.google.android.material",name="material", version.ref = "material"}
 datastore = {group = "androidx.datastore",name = "datastore-preferences", version.ref ="datastore"}
+androidx-compose-material-icons = {group = "androidx.compose.material",name = "material-icons-extended"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
